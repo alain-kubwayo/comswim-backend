@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Mail\RegisterMail;
+// use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,7 +39,8 @@ class AuthController extends Controller
         ]);
 
         if($user) {
-            Mail::to($request->email)->send(new RegisterMail($user));
+            // event(new Registered($user));
+            // Mail::to($request->email)->send(new RegisterMail($user));
             $userProfileData = $request->only(['date_of_birth', 'gender', 'telephone']);
             $user->userProfile()->create($userProfileData);
 
@@ -74,6 +76,7 @@ class AuthController extends Controller
                 ]);
                 $guardianData = $request->only(['guardian_first_name', 'guardian_last_name']);
                 $user->guardian()->create($guardianData);
+                $user->update(['self' => true]);
             }
 
             $token = $user->createToken('auth_token')->plainTextToken;

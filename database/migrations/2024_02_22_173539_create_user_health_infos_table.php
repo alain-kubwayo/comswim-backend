@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('wears_spectacles')->default(false);
             $table->boolean('takes_medication')->default(false);
             $table->boolean('past_swimming_lessons')->default(false);
-            $table->text('past_swimming_instructor_duration')->nullable();
+            $table->string('past_swimming_instructor_duration')->nullable();
             $table->boolean('bad_experiences')->default(false);
             $table->boolean('medical_aid_membership')->default(false);
             $table->string('medical_aid_name')->nullable();
