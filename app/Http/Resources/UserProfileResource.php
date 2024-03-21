@@ -14,7 +14,6 @@ class UserProfileResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
         return [
             'date_of_birth' => $this->date_of_birth,
             'gender' => $this->gender,

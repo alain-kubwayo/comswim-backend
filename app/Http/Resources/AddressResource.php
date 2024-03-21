@@ -14,7 +14,6 @@ class AddressResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
         return [
             'residential_address' => $this->residential_address,
             'postal_address' => $this->postal_address

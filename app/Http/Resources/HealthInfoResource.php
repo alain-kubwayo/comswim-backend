@@ -14,7 +14,6 @@ class HealthInfoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
         return [
             'chest_disorders' => $this->chest_disorders, 
             'physical_injuries' => $this->physical_injuries, 
