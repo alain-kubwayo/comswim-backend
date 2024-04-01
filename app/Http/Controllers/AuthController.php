@@ -64,7 +64,7 @@ class AuthController extends Controller
             ]);
             $guardianData = $request->only(['guardian_first_name', 'guardian_last_name']);
             $user->guardian()->create($guardianData);
-            $user->update(['self' => true]);
+            $user->update(['self' => false]);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
