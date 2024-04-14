@@ -26,4 +26,32 @@ class AdminController extends Controller
 
         return new UserResource($user);
     }
+
+    public function deleteApplication($id) {
+        $user = User::where('id', $id)->first();
+
+        if(!$user) {
+            return response()->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        if($user->userProfile) {
+            $user->userProfile()->delete();
+        }
+
+        if($user->address) {
+            $user->address()->delete();
+        }
+
+        if($user->healthInfo) {
+            $user->healthInfo()->delete();
+        }
+
+        if($user->guardian) {
+            $user->guardian()->delete();
+        }
+
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully'], Response::HTTP_OK);
+    }
 }
