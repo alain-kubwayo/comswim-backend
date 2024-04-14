@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,13 @@ Route::middleware('auth:sanctum')->get('/email/verify', function() {
     return view('emails.verify-email');
 });
 
+Route::middleware(['auth:sanctum', 'admin:api'])->get('/admin-test', [AdminController::class, 'getUsers']);
+Route::middleware(['auth:sanctum', 'admin:api'])->get('/applications/{id}', [AdminController::class, 'getApplication']);
+Route::middleware(['auth:sanctum', 'admin:api'])->delete('/applications/{id}', [AdminController::class, 'deleteApplication']);
+Route::middleware(['auth:sanctum', 'admin:api'])->put('/applications/{id}', [AdminController::class, 'updateApplication']);
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return response()->json([
+        'user' => $request->user()
+    ]);
+});
