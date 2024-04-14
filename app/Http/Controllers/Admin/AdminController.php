@@ -54,4 +54,38 @@ class AdminController extends Controller
 
         return response()->json(['message' => 'User deleted successfully'], Response::HTTP_OK);
     }
+
+    public function updateApplication(Request $request, $id) {
+        $user = User::where('id', $id)->first();
+
+        if(!$user) {
+            return response()->json(['message' => 'User not found.'], Response::HTTP_NOT_FOUND);
+        }
+
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email
+        ]);
+
+        $user->userProfile()->update([ 
+            'telephone' => $request->telephone,
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender 
+        ]);
+
+        $user->address()->update([
+            'residential_address' => $request->residential_address,
+            'postal_address' => $request->postal_address
+        ]);
+
+        if($request->guardian_first_name && $request->guardian_last_name) {
+            $user->guardian()->update([
+                'guardian_first_name' => $request->guardian_first_name,
+                'guardian_last_name' => $request->guardian_last_name
+            ]);
+        }
+
+        return response()->json(['message' => 'Application Updated Successfully!'], Response::HTTP_OK);
+    }
 }
