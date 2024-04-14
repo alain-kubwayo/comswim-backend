@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/email/verify', function() {
 });
 
 Route::middleware(['auth:sanctum', 'admin:api'])->get('/admin-test', [AdminController::class, 'getUsers']);
+Route::middleware(['auth:sanctum', 'admin:api'])->get('/applications/{id}', [AdminController::class, 'getApplication']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return response()->json([
