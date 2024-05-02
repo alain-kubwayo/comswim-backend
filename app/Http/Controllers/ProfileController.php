@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function getUserInformation() {
+    public function index() {
         $user = Auth::user();
         if(!$user) {
             return response()->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
@@ -18,13 +18,14 @@ class ProfileController extends Controller
         return new UserResource($user);
     }
 
-    public function editProfile(EditProfileRequest $request) {
+    public function update(EditProfileRequest $request) {
         if($request->user_type === 'guardian') {
             $request->validate([
                 'guardian_first_name' => 'required|string|max:255',
                 'guardian_last_name' => 'required|string|max:255'
             ]);
         }
+
         $user = User::findOrFail(Auth::user()->id);
 
         if(!$user) {
@@ -36,7 +37,7 @@ class ProfileController extends Controller
             'last_name' => $request->last_name
         ]);
 
-        $user->userProfile()->update([ 'telephone' => $request->telephone ]);
+        $user->profile()->update([ 'telephone' => $request->telephone ]);
 
         $user->address()->update([
             'residential_address' => $request->residential_address,

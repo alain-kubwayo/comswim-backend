@@ -59,7 +59,7 @@ class User extends Authenticatable
         return $this->hasOne(UserHealthInfo::class);
     }
 
-    public function userProfile() {
+    public function profile() {
         return $this->hasOne(UserProfile::class);
     }
 

@@ -34,8 +34,8 @@ class AdminController extends Controller
             return response()->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
 
-        if($user->userProfile) {
-            $user->userProfile()->delete();
+        if($user->profile) {
+            $user->profile()->delete();
         }
 
         if($user->address) {
@@ -68,10 +68,10 @@ class AdminController extends Controller
             'email' => $request->email
         ]);
 
-        $user->userProfile()->update([ 
+        $user->profile()->update([
             'telephone' => $request->telephone,
             'date_of_birth' => $request->date_of_birth,
-            'gender' => $request->gender 
+            'gender' => $request->gender
         ]);
 
         $user->address()->update([

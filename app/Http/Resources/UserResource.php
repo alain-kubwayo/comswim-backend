@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'self' => $this->self,
             'created_at' => $this->created_at,
-            'user_profile' => new UserProfileResource($this->userProfile),
+            'user_profile' => new UserProfileResource($this->profile),
             'address' => new AddressResource($this->address),
             'health_info' => new HealthInfoResource($this->healthInfo),
             'guardian' => new GuardianResource($this->guardian),

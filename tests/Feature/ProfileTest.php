@@ -32,7 +32,7 @@ class ProfileTest extends TestCase
             'telephone' => $faker->phoneNumber
         ];
 
-        $this->user->userProfile()->create($userProfileData);
+        $this->user->profile()->create($userProfileData);
 
         $userAddressData = [
             'residential_address' => $faker->streetAddress,
@@ -43,20 +43,20 @@ class ProfileTest extends TestCase
 
         $userHealthInfoData = [
             'chest_disorders' => $faker->randomElement([0, 1]),
-            'physical_injuries' => $faker->randomElement([0, 1]), 
-            'ear_disorders' => $faker->randomElement([0, 1]), 
+            'physical_injuries' => $faker->randomElement([0, 1]),
+            'ear_disorders' => $faker->randomElement([0, 1]),
             'allergies' => $faker->randomElement([0, 1]),
-            'heart_disorders' => $faker->randomElement([0, 1]), 
-            'lung_disorders' => $faker->randomElement([0, 1]), 
-            'low_muscle_tones' => $faker->randomElement([0, 1]), 
+            'heart_disorders' => $faker->randomElement([0, 1]),
+            'lung_disorders' => $faker->randomElement([0, 1]),
+            'low_muscle_tones' => $faker->randomElement([0, 1]),
             'wears_spectacles' => $faker->randomElement([0, 1]),
-            'takes_medication' => $faker->randomElement([0, 1]), 
-            'past_swimming_lessons' => $faker->randomElement([0, 1]), 
+            'takes_medication' => $faker->randomElement([0, 1]),
+            'past_swimming_lessons' => $faker->randomElement([0, 1]),
             'past_swimming_instructor_duration' => $faker->randomDigitNotNull(),
-            'bad_experiences' => $faker->randomElement([0, 1]), 
-            'medical_aid_membership' => $faker->randomElement([0, 1]), 
+            'bad_experiences' => $faker->randomElement([0, 1]),
+            'medical_aid_membership' => $faker->randomElement([0, 1]),
             'medical_aid_name' => $faker->firstName,
-            'medical_aid_number' => $faker->randomNumber(5, true), 
+            'medical_aid_number' => $faker->randomNumber(5, true),
             'main_member_full_name' => $faker->name
         ];
 
@@ -71,7 +71,7 @@ class ProfileTest extends TestCase
         }
     }
 
-    public function test_user_can_get_profile_information() 
+    public function test_user_can_get_profile_information()
     {
         $token = $this->user->createToken('auth_token')->plainTextToken;
 
@@ -89,30 +89,30 @@ class ProfileTest extends TestCase
                     'self' => $this->user->self,
                     'created_at' => $this->user->created_at->toISOString(),
                     'user_profile' => [
-                        'date_of_birth' => $this->user->userProfile->date_of_birth,
-                        'gender' => $this->user->userProfile->gender,
-                        'telephone' => $this->user->userProfile->telephone,
+                        'date_of_birth' => $this->user->profile->date_of_birth,
+                        'gender' => $this->user->profile->gender,
+                        'telephone' => $this->user->profile->telephone,
                     ],
                     'address' => [
                         'residential_address' => $this->user->address->residential_address,
                         'postal_address' => $this->user->address->postal_address
                     ],
                     'health_info' => [
-                        'chest_disorders' => $this->user->healthInfo->chest_disorders, 
-                        'physical_injuries' => $this->user->healthInfo->physical_injuries, 
-                        'ear_disorders' => $this->user->healthInfo->ear_disorders, 
+                        'chest_disorders' => $this->user->healthInfo->chest_disorders,
+                        'physical_injuries' => $this->user->healthInfo->physical_injuries,
+                        'ear_disorders' => $this->user->healthInfo->ear_disorders,
                         'allergies' => $this->user->healthInfo->allergies,
-                        'heart_disorders' => $this->user->healthInfo->heart_disorders, 
-                        'lung_disorders' => $this->user->healthInfo->lung_disorders, 
-                        'low_muscle_tones' => $this->user->healthInfo->low_muscle_tones, 
+                        'heart_disorders' => $this->user->healthInfo->heart_disorders,
+                        'lung_disorders' => $this->user->healthInfo->lung_disorders,
+                        'low_muscle_tones' => $this->user->healthInfo->low_muscle_tones,
                         'wears_spectacles' => $this->user->healthInfo->wears_spectacles,
-                        'takes_medication' => $this->user->healthInfo->takes_medication, 
-                        'past_swimming_lessons' => $this->user->healthInfo->past_swimming_lessons, 
+                        'takes_medication' => $this->user->healthInfo->takes_medication,
+                        'past_swimming_lessons' => $this->user->healthInfo->past_swimming_lessons,
                         'past_swimming_instructor_duration' => $this->user->healthInfo->past_swimming_instructor_duration,
-                        'bad_experiences' => $this->user->healthInfo->bad_experiences, 
-                        'medical_aid_membership' => $this->user->healthInfo->medical_aid_membership, 
+                        'bad_experiences' => $this->user->healthInfo->bad_experiences,
+                        'medical_aid_membership' => $this->user->healthInfo->medical_aid_membership,
                         'medical_aid_name' => $this->user->healthInfo->medical_aid_name,
-                        'medical_aid_number' => $this->user->healthInfo->medical_aid_number, 
+                        'medical_aid_number' => $this->user->healthInfo->medical_aid_number,
                         'main_member_full_name' => $this->user->healthInfo->main_member_full_name
                     ],
                     'guardian' => $this->user->self === 1 ? null :
