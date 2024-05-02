@@ -36,7 +36,7 @@ class ProfileController extends Controller
             'last_name' => $request->last_name
         ]);
 
-        $user->userProfile()->update([ 'telephone' => $request->telephone ]);
+        $user->profile()->update([ 'telephone' => $request->telephone ]);
 
         $user->address()->update([
             'residential_address' => $request->residential_address,
