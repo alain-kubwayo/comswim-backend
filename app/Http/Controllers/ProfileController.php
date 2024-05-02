@@ -18,16 +18,18 @@ class ProfileController extends Controller
         return new UserResource($user);
     }
 
-    public function update(EditProfileRequest $request, User $user) {
-        if(Auth::user()->id !== $user->id) {
-            return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
-        }
-
+    public function update(EditProfileRequest $request) {
         if($request->user_type === 'guardian') {
             $request->validate([
                 'guardian_first_name' => 'required|string|max:255',
                 'guardian_last_name' => 'required|string|max:255'
             ]);
+        }
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        if(!$user) {
+            return response()->json(['message' => 'User not found.'], Response::HTTP_NOT_FOUND);
         }
 
         $user->update([

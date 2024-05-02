@@ -20,22 +20,24 @@ use App\Http\Controllers\Admin\AdminController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('verify-email/{token}', [AuthController::class, 'verifyEmail']);
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
-Route::middleware('auth:sanctum')->get('/user-profile', [ProfileController::class, 'index']);
-Route::middleware('auth:sanctum')->get('/edit-profile', [ProfileController::class, 'index']);
-Route::middleware('auth:sanctum')->put('/edit-profile/{user}', [ProfileController::class, 'update']);
-
-Route::middleware('auth:sanctum')->get('/email/verify', function() {
-    return view('emails.verify-email');
+Route::middleware('auth:sanctum')->group(function() {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/user-profile', [ProfileController::class, 'index']);
+    Route::get('/edit-profile', [ProfileController::class, 'index']);
+    Route::put('/edit-profile', [ProfileController::class, 'update']);
+    Route::put('/email/verify', function() {
+        return view('emails.verify-email');
+    });
+    Route::get('/user', function (Request $request) {
+        return response()->json([
+            'user' => $request->user()
+        ]);
+    });
 });
 
-Route::middleware(['auth:sanctum', 'admin:api'])->get('/admin-test', [AdminController::class, 'getUsers']);
-Route::middleware(['auth:sanctum', 'admin:api'])->get('/applications/{id}', [AdminController::class, 'getApplication']);
-Route::middleware(['auth:sanctum', 'admin:api'])->delete('/applications/{id}', [AdminController::class, 'deleteApplication']);
-Route::middleware(['auth:sanctum', 'admin:api'])->put('/applications/{id}', [AdminController::class, 'updateApplication']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return response()->json([
-        'user' => $request->user()
-    ]);
+Route::middleware(['auth:sanctum', 'admin:api'])->group(function() {
+    Route::get('/admin-test', [AdminController::class, 'getUsers']);
+    Route::get('/applications/{id}', [AdminController::class, 'getApplication']);
+    Route::delete('/applications/{id}', [AdminController::class, 'deleteApplication']);
+    Route::put('/applications/{id}', [AdminController::class, 'updateApplication']);
 });
