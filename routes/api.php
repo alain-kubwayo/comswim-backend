@@ -21,9 +21,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('verify-email/{token}', [AuthController::class, 'verifyEmail']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
-Route::middleware('auth:sanctum')->get('/user-profile', [ProfileController::class, 'getUserInformation']);
-Route::middleware('auth:sanctum')->get('/edit-profile', [ProfileController::class, 'getUserInformation']);
-Route::middleware('auth:sanctum')->put('/edit-profile', [ProfileController::class, 'editProfile']);
+Route::middleware('auth:sanctum')->get('/user-profile', [ProfileController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/edit-profile', [ProfileController::class, 'index']);
+Route::middleware('auth:sanctum')->put('/edit-profile/{user}', [ProfileController::class, 'update']);
 
 Route::middleware('auth:sanctum')->get('/email/verify', function() {
     return view('emails.verify-email');
