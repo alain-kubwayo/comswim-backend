@@ -30,7 +30,7 @@ class AuthController extends Controller
         }
 
         $userProfileData = $request->only(['date_of_birth', 'gender', 'telephone']);
-        $user->userProfile()->create($userProfileData);
+        $user->profile()->create($userProfileData);
 
         $addressData = $request->only(['residential_address', 'postal_address']);
         $user->address()->create($addressData);
@@ -97,7 +97,7 @@ class AuthController extends Controller
         if(empty($user)) {
             return response()->json(['success' => false, 'message' => 'User not found'], RESPONSE::HTTP_NOT_FOUND);
         }
-     
+
         $user->email_verified_at = date('Y-m-d H:i:s');
         $user->remember_token = Str::random(40);
         $user->save();

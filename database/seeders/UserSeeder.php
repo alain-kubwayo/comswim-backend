@@ -25,11 +25,11 @@ class UserSeeder extends Seeder
             'residential_address' => 'kigali, rwanda',
             'postal_address' => '00000',
             'role' => 'admin',
-            'chest_disorders' => true, 
+            'chest_disorders' => true,
             'physical_injuries' => true,
             'ear_disorders' => true,
             'allergies' => true,
-            'heart_disorders' => true,            
+            'heart_disorders' => true,
             'lung_disorders' => true,
             'low_muscle_tones' => true,
             'wears_spectacles' => true,
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'bad_experiences' => false,
             'medical_aid_membership' => false,
             'medical_aid_name' => null,
-            'medical_aid_number' => null,            
+            'medical_aid_number' => null,
             'main_member_full_name' => null
         ]);
 
@@ -54,11 +54,11 @@ class UserSeeder extends Seeder
             'residential_address' => 'accra, ghana',
             'postal_address' => '12000',
             'role' => 'learner',
-            'chest_disorders' => true, 
+            'chest_disorders' => true,
             'physical_injuries' => true,
             'ear_disorders' => false,
             'allergies' => true,
-            'heart_disorders' => true,            
+            'heart_disorders' => true,
             'lung_disorders' => true,
             'low_muscle_tones' => true,
             'wears_spectacles' => true,
@@ -68,7 +68,7 @@ class UserSeeder extends Seeder
             'bad_experiences' => false,
             'medical_aid_membership' => false,
             'medical_aid_name' => null,
-            'medical_aid_number' => null,            
+            'medical_aid_number' => null,
             'main_member_full_name' => null
         ]);
 
@@ -83,11 +83,11 @@ class UserSeeder extends Seeder
             'residential_address' => 'johannesburg, south africa',
             'postal_address' => '23022',
             'role' => 'learner',
-            'chest_disorders' => true, 
+            'chest_disorders' => true,
             'physical_injuries' => true,
             'ear_disorders' => true,
             'allergies' => true,
-            'heart_disorders' => true,            
+            'heart_disorders' => true,
             'lung_disorders' => true,
             'low_muscle_tones' => true,
             'wears_spectacles' => true,
@@ -97,7 +97,7 @@ class UserSeeder extends Seeder
             'bad_experiences' => false,
             'medical_aid_membership' => false,
             'medical_aid_name' => null,
-            'medical_aid_number' => null,            
+            'medical_aid_number' => null,
             'main_member_full_name' => null
         ]);
     }
@@ -113,7 +113,7 @@ class UserSeeder extends Seeder
             'role' => $userData['role']
         ]);
 
-        $user->userProfile()->create([
+        $user->profile()->create([
             'date_of_birth' => $userData['date_of_birth'],
             'gender' => $userData['gender'],
             'telephone' => $userData['telephone'],
@@ -125,21 +125,21 @@ class UserSeeder extends Seeder
         ]);
 
         $user->healthInfo()->create([
-            'chest_disorders' => $userData['chest_disorders'], 
-            'physical_injuries' => $userData['physical_injuries'], 
-            'ear_disorders' => $userData['ear_disorders'], 
+            'chest_disorders' => $userData['chest_disorders'],
+            'physical_injuries' => $userData['physical_injuries'],
+            'ear_disorders' => $userData['ear_disorders'],
             'allergies' => $userData['allergies'],
-            'heart_disorders' => $userData['heart_disorders'], 
-            'lung_disorders' => $userData['lung_disorders'], 
-            'low_muscle_tones' => $userData['low_muscle_tones'], 
+            'heart_disorders' => $userData['heart_disorders'],
+            'lung_disorders' => $userData['lung_disorders'],
+            'low_muscle_tones' => $userData['low_muscle_tones'],
             'wears_spectacles' => $userData['wears_spectacles'],
-            'takes_medication' => $userData['takes_medication'], 
-            'past_swimming_lessons' => $userData['past_swimming_lessons'], 
+            'takes_medication' => $userData['takes_medication'],
+            'past_swimming_lessons' => $userData['past_swimming_lessons'],
             'past_swimming_instructor_duration' => $userData['past_swimming_instructor_duration'],
-            'bad_experiences' => $userData['bad_experiences'], 
-            'medical_aid_membership' => $userData['medical_aid_membership'], 
+            'bad_experiences' => $userData['bad_experiences'],
+            'medical_aid_membership' => $userData['medical_aid_membership'],
             'medical_aid_name' => $userData['medical_aid_name'],
-            'medical_aid_number' => $userData['medical_aid_number'], 
+            'medical_aid_number' => $userData['medical_aid_number'],
             'main_member_full_name' => $userData['main_member_full_name']
         ]);
 
